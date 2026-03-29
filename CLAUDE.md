@@ -10,8 +10,8 @@
 
 ## 起動前の必須手順
 ```bash
-# Excelを必ず閉じてから実行
-taskkill /F /IM EXCEL.EXE
+# Excelを必ず閉じてから実行（WSLからはpowershell.exe経由）
+powershell.exe -Command "taskkill /F /IM EXCEL.EXE"
 
 python3 rebuild_excel.py
 ```
@@ -20,11 +20,11 @@ python3 rebuild_excel.py
 - `ReDim array(1 To 0)` → エラー9。`If count = 0 Then Exit Sub` ガード必須
 - openpyxl生成xlsxはcalcChain.xmlを zipfile で除去してから保存
 - Excelが月文字列を日付シリアル値に変換 → `TEXT(cell,"yyyy年mm月")` でラップ
-- ゾンビExcel: テスト冒頭で `taskkill /F /IM EXCEL.EXE`
+- ゾンビExcel: テスト冒頭で `powershell.exe -Command "taskkill /F /IM EXCEL.EXE"`
 - PowerShell COM VBA注入は2ステップ: ①xlsx→xlsm保存 ②再オープン→注入
 
 ## ファイル保存場所
-- 完成版: `/mnt/c/Users/derds/OneDrive/デスクトップ/`（ユーザーへ渡すファイルはここ）
+- 完成版: `/mnt/c/Users/h-kaw/OneDrive/デスクトップ/`（ユーザーへ渡すファイルはここ）
 - WSL側作業: `~/` 配下
 
 ## 開発ルール
